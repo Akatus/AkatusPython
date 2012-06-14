@@ -13,11 +13,16 @@ from pykatus import Akatus
 akatus = Akatus()
 
 akatus.set_ambiente("sandbox")
-akatus.set_recebedor("29D4EB49-735E-429D-A5C3-B19DF50ADC47", "aa.borba@yahoo.com.br")
-akatus.set_pagador("Alexandre", "alexandre.borba@imasters.com.br")
-akatus.set_tel_pagador("residencial","1156321478")
-akatus.set_produto("UFC153", "Cueca Velha", "2", "10.00", "2.00", "0.00", "0.00")
-akatus.set_transacao("0.00", "4.00", "0.00", "BRL", "cuecanova", "boleto")
+
+akatus.set_recebedor("seu_token", "seu_email")
+
+akatus.set_pagador("nome_pagador", "email_do_pagador")
+
+akatus.set_tel_pagador("tipo_do_telefone","1199999999")
+
+akatus.set_produto("codigo", "descricao", "qtdade", "preco", "peso", "frete", "desc")
+
+akatus.set_transacao("desc_total", "peso_total", "frete_total", "BRL", "ref", "meio_de_pagamento")
 
 akatus.envia()
 
