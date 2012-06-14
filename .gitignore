@@ -1,0 +1,7 @@
+.settings
+teste.py
+*.pyc
+.pydevproject
+.project
+build/
+pykatus/*.pyc
