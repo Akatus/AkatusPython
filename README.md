@@ -2,6 +2,7 @@ Módulo Akatus para integração com Python
 ==========================================
 
 Author: Alê Borba
+
 Version: v0.0.1
 
 Como usar
@@ -17,7 +18,9 @@ akatus.set_pagador("Alexandre", "alexandre.borba@imasters.com.br")
 akatus.set_tel_pagador("residencial","1156321478")
 akatus.set_produto("UFC153", "Cueca Velha", "2", "10.00", "2.00", "0.00", "0.00")
 akatus.set_transacao("0.00", "4.00", "0.00", "BRL", "cuecanova", "boleto")
+
 akatus.envia()
+
 print akatus.get_resposta()
 
 ToDo
