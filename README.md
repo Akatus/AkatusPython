@@ -7,8 +7,8 @@ Version: v0.0.2
 
 ChangeLog:
 -----------
-*Validação de campos vazios.
-*Inclusão de testes para checagem de parametros vazios.
+* Validação de campos vazios.
+* Inclusão de testes para checagem de parametros vazios.
 
 Como usar
 -------------------------
