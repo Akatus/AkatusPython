@@ -3,7 +3,12 @@ Módulo Akatus para integração com Python
 
 Author: Alê Borba
 
-Version: v0.0.1
+Version: v0.0.2
+
+ChangeLog:
+-----------
+*Validação de campos vazios.
+*Inclusão de testes para checagem de parametros vazios.
 
 Como usar
 -------------------------

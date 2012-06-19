@@ -1,3 +1,5 @@
 setup.py
 pykatus/__init__.py
 pykatus/akatus.py
+test/__init__.py
+test/test.py

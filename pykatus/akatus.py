@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import os
 import pycurl
 
 from lxml import etree
@@ -14,16 +13,23 @@ class Akatus():
         
     
     def set_ambiente(self,ambiente):
+        if not ambiente:
+            raise ValueError("Você deve definir um ambiente")
+        
         if ambiente == "sandbox":
             self.url = "https://dev.akatus.com/api/v1/carrinho.xml"
             
         if ambiente == "producao":
             self.url = "https://www.akatus.com/api/v1/carrinho.xml"
-            
-        return self
+
             
     
     def set_recebedor(self,token, email):
+        if not token:
+            raise ValueError("Você deve definir o token")
+        if not email:
+            raise ValueError("Você deve definir o email")
+        
         carrinho        = self.carrinho
         _recebedor      = etree.SubElement(carrinho, "recebedor")
         _api_key        = etree.SubElement(_recebedor, "api_key")
@@ -34,6 +40,11 @@ class Akatus():
         return self
     
     def set_pagador(self,nome, email):
+        if not nome:
+            raise ValueError("Você deve definir o nome do pagador")
+        if not email:
+            raise ValueError("Você deve definir o email do pagador")
+        
         carrinho    = self.carrinho
         _pagador    = etree.SubElement(carrinho, "pagador")
         _nome       = etree.SubElement(_pagador, "nome")
@@ -45,6 +56,11 @@ class Akatus():
     
     
     def set_tel_pagador(self,tipo, numero):
+        if not tipo:
+            raise ValueError("Você deve definir um tipo de telefone")
+        if not numero:
+            raise ValueError("Você deve passar um número de telefone")
+        
         pagador         = self.carrinho[1]
         _telefones      = etree.SubElement(pagador, "telefones")
         _telefone       = etree.SubElement(_telefones, "telefone")
@@ -56,6 +72,21 @@ class Akatus():
         return self
     
     def set_produto(self,codigo, descricao, quantidade, preco, peso, frete, desconto):
+        if not codigo:
+            raise ValueError("Você deve definir um código")
+        if not descricao:
+            raise ValueError("Você deve definir uma descrição")
+        if not quantidade:
+            raise ValueError("Você deve definir uma quantidade")
+        if not preco:
+            raise ValueError("Você deve definir um preco")
+        if not peso:
+            raise ValueError("Você deve definir um peso")
+        if not frete:
+            raise ValueError("Você deve definir um frete")
+        if not desconto:
+            raise ValueError("Você deve definir um desconto")
+        
         carrinho            = self.carrinho
         _produtos           = etree.SubElement(carrinho, "produtos")
         _produto            = etree.SubElement(_produtos, "produto")
@@ -78,6 +109,19 @@ class Akatus():
     
     
     def set_transacao(self, desconto_total, peso_total, frete_total, moeda, referencia, meio_de_pagamento):
+        if not desconto_total:
+            raise ValueError("Você deve definir o desconto total")
+        if not peso_total:
+            raise ValueError("Você deve definir o peso total")
+        if not frete_total:
+            raise ValueError("Você deve definir o frete total")
+        if not moeda:
+            raise ValueError("Você deve definir a moeda")
+        if not referencia:
+            raise ValueError("Você deve definir a referencia")
+        if not meio_de_pagamento:
+            raise ValueError("Você deve definir um meio de pagamento")
+        
         carrinho                = self.carrinho
         _transacao              = etree.SubElement(carrinho, "transacao")
         _desconto_total         = etree.SubElement(_transacao, "desconto_total")

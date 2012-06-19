@@ -5,3 +5,4 @@ teste.py
 .project
 build/
 pykatus/*.pyc
+test/*.pyc
