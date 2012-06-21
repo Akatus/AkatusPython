@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 import unittest
-import lxml
 from pykatus import Akatus
 from lxml import etree
 from lxml import objectify

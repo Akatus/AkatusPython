@@ -30,12 +30,12 @@ class Akatus():
         if not email:
             raise ValueError("Você deve definir o email")
         
-        carrinho        = self.carrinho
-        _recebedor      = etree.SubElement(carrinho, "recebedor")
-        _api_key        = etree.SubElement(_recebedor, "api_key")
-        _api_key.text   = token
-        _email          = etree.SubElement(_recebedor, "email")
-        _email.text     = email
+        carrinho       = self.carrinho
+        recebedor      = etree.SubElement(carrinho, "recebedor")
+        api_key        = etree.SubElement(recebedor, "api_key")
+        api_key.text   = token
+        email_tag      = etree.SubElement(recebedor, "email")
+        email_tag.text = email
         
         return self
     
@@ -45,12 +45,12 @@ class Akatus():
         if not email:
             raise ValueError("Você deve definir o email do pagador")
         
-        carrinho    = self.carrinho
-        _pagador    = etree.SubElement(carrinho, "pagador")
-        _nome       = etree.SubElement(_pagador, "nome")
-        _nome.text  = nome
-        _email      = etree.SubElement(_pagador, "email")
-        _email.text = email
+        carrinho        = self.carrinho
+        pagador         = etree.SubElement(carrinho, "pagador")
+        nome_tag        = etree.SubElement(pagador, "nome")
+        nome_tag.text   =  nome
+        email_tag       = etree.SubElement(pagador, "email")
+        email_tag.text  = email
         
         return self
     
@@ -62,12 +62,12 @@ class Akatus():
             raise ValueError("Você deve passar um número de telefone")
         
         pagador         = self.carrinho[1]
-        _telefones      = etree.SubElement(pagador, "telefones")
-        _telefone       = etree.SubElement(_telefones, "telefone")
-        _tipo           = etree.SubElement(_telefone, "tipo")
-        _tipo.text      = tipo
-        _numero         = etree.SubElement(_telefone, "numero")
-        _numero.text    = numero
+        telefones       = etree.SubElement(pagador, "telefones")
+        telefone        = etree.SubElement(telefones, "telefone")
+        tipo_tag        = etree.SubElement(telefone, "tipo")
+        tipo_tag.text   = tipo
+        numero_tag      = etree.SubElement(telefone, "numero")
+        numero_tag.text = numero
         
         return self
     
@@ -88,22 +88,22 @@ class Akatus():
             raise ValueError("Você deve definir um desconto")
         
         carrinho            = self.carrinho
-        _produtos           = etree.SubElement(carrinho, "produtos")
-        _produto            = etree.SubElement(_produtos, "produto")
-        _codigo             = etree.SubElement(_produto, "codigo")
-        _codigo.text        = codigo
-        _descricao          = etree.SubElement(_produto, "descricao")
-        _descricao.text     = descricao
-        _quantidade         = etree.SubElement(_produto, "quantidade")
-        _quantidade.text    = quantidade
-        _preco              = etree.SubElement(_produto, "preco")
-        _preco.text         = preco
-        _peso               = etree.SubElement(_produto, "peso")
-        _peso.text          = peso
-        _frete              = etree.SubElement(_produto, "frete")
-        _frete.text         = frete
-        _desconto           = etree.SubElement(_produto, "desconto")
-        _desconto.text      = desconto
+        produtos            = etree.SubElement(carrinho, "produtos")
+        produto             = etree.SubElement(produtos, "produto")
+        codigo_tag          = etree.SubElement(produto, "codigo")
+        codigo_tag.text     = codigo
+        descricao_tag       = etree.SubElement(produto, "descricao")
+        descricao_tag.text  = descricao
+        quantidade_tag      = etree.SubElement(produto, "quantidade")
+        quantidade_tag.text = quantidade
+        preco_tag           = etree.SubElement(produto, "preco")
+        preco_tag.text      = preco
+        peso_tag            = etree.SubElement(produto, "peso")
+        peso_tag.text       = peso
+        frete_tag           = etree.SubElement(produto, "frete")
+        frete_tag.text      = frete
+        desconto_tag        = etree.SubElement(produto, "desconto")
+        desconto_tag.text   = desconto
         
         return self
     
@@ -122,20 +122,20 @@ class Akatus():
         if not meio_de_pagamento:
             raise ValueError("Você deve definir um meio de pagamento")
         
-        carrinho                = self.carrinho
-        _transacao              = etree.SubElement(carrinho, "transacao")
-        _desconto_total         = etree.SubElement(_transacao, "desconto_total")
-        _desconto_total.text    = desconto_total
-        _peso_total             = etree.SubElement(_transacao, "peso_total")
-        _peso_total.text        = peso_total
-        _frete_total            = etree.SubElement(_transacao, "frete_total")
-        _frete_total.text       = frete_total
-        _moeda                  = etree.SubElement(_transacao, "moeda")
-        _moeda.text             = moeda
-        _referencia             = etree.SubElement(_transacao, "referencia")
-        _referencia.text        = referencia
-        _meio_de_pagamento      = etree.SubElement(_transacao, "meio_de_pagamento")
-        _meio_de_pagamento.text = meio_de_pagamento
+        carrinho                    = self.carrinho
+        transacao                   = etree.SubElement(carrinho, "transacao")
+        desconto_total_tag          = etree.SubElement(transacao, "desconto_total")
+        desconto_total_tag.text     = desconto_total
+        peso_total_tag              = etree.SubElement(transacao, "peso_total")
+        peso_total_tag.text         = peso_total
+        frete_total_tag             = etree.SubElement(transacao, "frete_total")
+        frete_total_tag.text        = frete_total
+        moeda_tag                   = etree.SubElement(transacao, "moeda")
+        moeda_tag.text              = moeda
+        referencia_tag              = etree.SubElement(transacao, "referencia")
+        referencia_tag.text         = referencia
+        meio_de_pagamento_tag       = etree.SubElement(transacao, "meio_de_pagamento")
+        meio_de_pagamento_tag.text  = meio_de_pagamento
         
         return self
     
