@@ -140,7 +140,7 @@ class Akatus():
         return self
     
     
-    def get_xml(self):
+    def _get_xml(self):
         return etree.tostring(self.carrinho)
     
     
@@ -153,8 +153,8 @@ class Akatus():
         curl.setopt(pycurl.USERAGENT, "Mozilla/4.0")
         curl.setopt(pycurl.POST, True)
         curl.setopt(pycurl.SSL_VERIFYPEER, False)
-        curl.setopt(pycurl.POSTFIELDS, self.get_xml())
-        curl.setopt(pycurl.WRITEFUNCTION, resposta.callback)
+        curl.setopt(pycurl.POSTFIELDS, self.__get_xml())
+        curl.setopt(pycurl.WRITEFUNCTION, resposta.__callback)
         curl.perform()
         curl.close
         
@@ -172,5 +172,5 @@ class RespostaAkatus:
     def __init__(self):
         self.conteudo = ""
         
-    def callback(self, buff):
+    def __callback(self, buff):
         self.conteudo = buff

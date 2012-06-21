@@ -77,7 +77,7 @@ class AkatusTest(unittest.TestCase):
         obj_xml_e   = objectify.fromstring(xml_valid)
         xml_expect  = etree.tostring(obj_xml_e)
         
-        obj_xml_t   = objectify.fromstring(self.akatus.get_xml())
+        obj_xml_t   = objectify.fromstring(self.akatus._get_xml())
         xml_test    = etree.tostring(obj_xml_t)
         
         self.assertEquals(xml_expect,xml_test)
