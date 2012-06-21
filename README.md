@@ -3,10 +3,14 @@ Módulo Akatus para integração com Python
 
 Author: Alê Borba
 
-Version: v0.0.2
+Version: v0.0.3
 
 ChangeLog:
 -----------
+0.0.3
+* Testes para a geração do XML
+
+0.0.2
 * Validação de campos vazios.
 * Inclusão de testes para checagem de parametros vazios.
 
