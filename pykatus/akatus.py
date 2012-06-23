@@ -153,8 +153,8 @@ class Akatus():
         curl.setopt(pycurl.USERAGENT, "Mozilla/4.0")
         curl.setopt(pycurl.POST, True)
         curl.setopt(pycurl.SSL_VERIFYPEER, False)
-        curl.setopt(pycurl.POSTFIELDS, self.__get_xml())
-        curl.setopt(pycurl.WRITEFUNCTION, resposta.__callback)
+        curl.setopt(pycurl.POSTFIELDS, self._get_xml())
+        curl.setopt(pycurl.WRITEFUNCTION, resposta._callback)
         curl.perform()
         curl.close
         
@@ -172,5 +172,5 @@ class RespostaAkatus:
     def __init__(self):
         self.conteudo = ""
         
-    def __callback(self, buff):
+    def _callback(self, buff):
         self.conteudo = buff
