@@ -117,9 +117,9 @@ class Akatus():
         resposta = etree.XML(self.retorno)
         
         if resposta[0].tag == 'status':
-            return {'status':resposta[0].text, 'descricao':resposta[1].text}
+            return {resposta[0].tag:resposta[0].text, resposta[1].tag:resposta[1].text}
         
-        return {'carrinho':resposta[0].text,'status':resposta[1].text, 'transacao':resposta[2].text,'url_retorno':resposta[3].text} 
+        return {resposta[0].tag:resposta[0].text,resposta[1].tag:resposta[1].text, resposta[2].tag:resposta[2].text,resposta[3].tag:resposta[3].text} 
     
     
 class RespostaAkatus:
