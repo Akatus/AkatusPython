@@ -2,6 +2,7 @@ Módulo Akatus para integração com Python
 ==========================================
 
 Author: Alê Borba
+Contributor: Igor Hercowitz
 
 Version: v0.0.4
 
