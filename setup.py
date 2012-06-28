@@ -8,7 +8,7 @@ setup(name='Pykatus',
       author='Ale Borba',
       author_email='alexandre.borba@imasters.com.br',
       url='https://www.akatus.com/',
-      packages=['pykatus'],
+      packages=['pykatus','validators'],
       classifiers=[
         'Development Status :: 4 - Beta',
         'Environment :: Console',
