@@ -13,6 +13,9 @@ def check_parameters(f):
                   preco="um preco",
                   peso="um peso",
                   frete="um frete",
+                  referencia="uma referencia",
+                  num_tel="o número de telefone",
+                  tel_tipo="o tipo de telefone",
                   desconto="um desconto")
     
     def wrapper(*a, **k):
