@@ -3,7 +3,6 @@
 
 import unittest
 from pykatus import Akatus
-from validators import Validators, check_parameters
 from lxml import etree
 from lxml import objectify
 
