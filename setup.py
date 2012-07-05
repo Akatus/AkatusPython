@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name='Pykatus',
-      version='0.0.5',
+      version='0.0.6',
       description='Python integration with Akatus payment gateway via API',
       author='Ale Borba',
       author_email='alexandre.borba@imasters.com.br',
