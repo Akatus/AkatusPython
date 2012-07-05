@@ -4,10 +4,15 @@ Módulo Akatus para integração com Python
 Author: Alê Borba
 Contributor: Igor Hercowitz
 
-Version: v0.0.4
+Version: v0.0.5
 
 ChangeLog:
 -----------
+0.0.5
+* Pequenas refatorações
+* Implementação de XML Schema para validação antes do envio
+* Retirada do XML no arquivo de testes.
+
 0.0.4
 * Implentação de validators()
 * Refatoração na geração do XML
@@ -42,7 +47,6 @@ print akatus.get_resposta()
 
 ToDo
 ----------------
-* Validar melhor os campos
 * Tratar melhor os erros
 * Melhorar os testes automatizados
 * Opção de incluir mais de um produto
