@@ -3,8 +3,6 @@
 
 import unittest
 from pykatus import Akatus
-from lxml import etree
-from lxml import objectify
 
 class AkatusTest(unittest.TestCase):
     
@@ -30,53 +28,7 @@ class AkatusTest(unittest.TestCase):
         
     def test_trasacao_is_none(self):
         self.assertRaises(ValueError, self.akatus.set_transacao,desconto_total='', peso_total='', frete_total='', moeda='', referencia='', meio_de_pagamento='')
-        
-    def test_xml(self):
-        xml_valid = '''
-        <carrinho>
-            <recebedor>
-                <api_key>29D4EB49-735E-429D-A5C3-B19DF50ADC47</api_key>
-                <email>aa.borba@yahoo.com.br</email>
-            </recebedor>
-            <pagador>
-                <telefones>
-                    <telefone>
-                        <tipo>residencial</tipo>
-                        <numero>1156321478</numero>
-                    </telefone>
-                </telefones>
-                <email>alexandre.borba@imasters.com.br</email>
-                <nome>Alexandre</nome>
-            </pagador>
-            <produtos>
-                <produto>
-                    <quantidade>2</quantidade>
-                    <peso>2.00</peso>
-                    <frete>0.00</frete>
-                    <preco>10.00</preco>
-                    <codigo>UFC153</codigo>
-                    <descricao>Cueca Velha</descricao>
-                    <desconto>0.00</desconto>
-                </produto>
-            </produtos>
-            <transacao>
-                <referencia>cuecanova</referencia>
-                <meio_de_pagamento>boleto</meio_de_pagamento>
-                <desconto_total>0.00</desconto_total>
-                <peso_total>4.00</peso_total>
-                <frete_total>0.00</frete_total>
-                <moeda>BRL</moeda>
-            </transacao>
-        </carrinho>
-        '''
-        
-        obj_xml_e   = objectify.fromstring(xml_valid)
-        xml_expect  = etree.tostring(obj_xml_e)
-        
-        obj_xml_t   = objectify.fromstring(self.akatus._get_xml())
-        xml_test    = etree.tostring(obj_xml_t)
-        
-        self.assertEquals(xml_expect,xml_test)
+
         
 if __name__== '__main__':
     unittest.main()

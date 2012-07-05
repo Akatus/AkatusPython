@@ -9,11 +9,11 @@ from validators import Validators, check_parameters
 
 class Akatus():
     
-    def __init__(self, xml_node = "carrinho"):
+    def __init__(self, xml_node = "carrinho", namespace = "http://connect.akatus.com/"):
         self.validators = Validators()
         
         if xml_node:
-            self.xml_node = etree.Element(xml_node)
+            self.xml_node = etree.Element(xml_node, xmlns=namespace)
         
     def monta_xml(self, parent, **kwargs):
         if isinstance(parent, etree._Element):
@@ -68,13 +68,13 @@ class Akatus():
     def set_produto(self,codigo, descricao, quantidade, preco, peso, frete, desconto):
         
         self.monta_xml(self.xml_node, produtos=dict(produto=dict(codigo=codigo,
-                                                                 descricao=descricao,
-                                                                 quantidade=quantidade,
-                                                                 preco=preco,
-                                                                 peso=peso,
-                                                                 frete=frete,
-                                                                 desconto=desconto)))
-        
+                                                                             descricao=descricao,
+                                                                             quantidade=quantidade,
+                                                                             preco=preco,
+                                                                             peso=peso,
+                                                                             frete=frete,
+                                                                             desconto=desconto)))
+                    
         return self
     
     
@@ -96,6 +96,16 @@ class Akatus():
     
     
     def envia(self):
+        
+        xmlbase = open("test/xmlschema.xsd","r")
+        
+        xmlparser   = etree.parse(xmlbase)
+        xmlschema   = etree.XMLSchema(xmlparser)
+        
+        xml_enviado = etree.fromstring(self._get_xml())
+        
+        if not xmlschema.validate(xml_enviado):
+            raise ValueError(xmlschema.error_log)
         
         resposta = RespostaAkatus()
         
