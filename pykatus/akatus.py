@@ -15,14 +15,18 @@ class Akatus():
         if xml_node:
             self.xml_node = etree.Element(xml_node, xmlns=namespace)
         
-    def monta_xml(self, parent, **kwargs):
+    def monta_xml(self, parent, unique=False, **kwargs):
         if isinstance(parent, etree._Element):
             node_parent = parent
         else:
             node_parent = etree.Element(parent)
         
         for k,v in kwargs.items():
-            node = etree.SubElement(node_parent, k)
+            if unique and parent.find(k) is not None:
+                node = parent.find(k) 
+            else:
+                node = etree.SubElement(node_parent, k)
+               
             if isinstance(v, dict):
                 self.monta_xml(node, **v)
             else:
@@ -67,7 +71,7 @@ class Akatus():
     @check_parameters
     def set_produto(self,codigo, descricao, quantidade, preco, peso, frete, desconto):
         
-        self.monta_xml(self.xml_node, produtos=dict(produto=dict(codigo=codigo,
+        self.monta_xml(self.xml_node, unique=True, produtos=dict(produto=dict(codigo=codigo,
                                                                              descricao=descricao,
                                                                              quantidade=quantidade,
                                                                              preco=preco,
