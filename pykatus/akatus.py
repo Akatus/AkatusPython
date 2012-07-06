@@ -22,8 +22,8 @@ class Akatus():
             node_parent = etree.Element(parent)
         
         for k,v in kwargs.items():
-            if unique and parent.find(k) is not None:
-                node = parent.find(k) 
+            if unique and node_parent.find(k) is not None:
+                node = node_parent.find(k) 
             else:
                 node = etree.SubElement(node_parent, k)
                
