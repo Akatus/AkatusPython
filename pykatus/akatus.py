@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""Modulo de Integracao com a API Akatus"""
 
 import pycurl
 
@@ -8,14 +9,21 @@ from validators import Validators, check_parameters
 
 
 class Akatus():
+    """Classe que trata toda a coleta de dados e envio para a API"""
     
     def __init__(self, xml_node = "carrinho", namespace = "http://connect.akatus.com/"):
+        """Metodo construtor que recebe o nome do node pai do XML de envio
+        e o namespace para a validacao no XML Schema"""
+        
         self.validators = Validators()
         
         if xml_node:
             self.xml_node = etree.Element(xml_node, xmlns=namespace)
         
-    def monta_xml(self, parent, unique=False, **kwargs):
+    def _monta_xml(self, parent, unique=False, **kwargs):
+        """Metodo interno que monta o XML utilizando os parametros passados
+        por outros metodos."""
+        
         if isinstance(parent, etree._Element):
             node_parent = parent
         else:
@@ -28,7 +36,7 @@ class Akatus():
                 node = etree.SubElement(node_parent, k)
                
             if isinstance(v, dict):
-                self.monta_xml(node, **v)
+                self._monta_xml(node, **v)
             else:
                 node.text = v
                 
@@ -37,6 +45,9 @@ class Akatus():
     
     @check_parameters
     def set_ambiente(self,ambiente):
+        """Metodo que define qual o ambiente sera usado, as opcoes
+        sao: 'sandbox' ou 'producao' """
+        
         ambientes = dict(sandbox="dev", producao="www")
         
         try:
@@ -47,20 +58,23 @@ class Akatus():
             
     @check_parameters
     def set_recebedor(self,token, email):
+        """Metodo que insere no XML as informacoes do recebedor que constam na
+        conta cadastrada na Akatus"""
         
         self.validators.email(email)
         
-        self.monta_xml(self.xml_node, recebedor=dict(api_key=token,email=email))
+        self._monta_xml(self.xml_node, recebedor=dict(api_key=token,email=email))
 
         return self
     
     
     @check_parameters
     def set_pagador(self,nome, email, tipo_tel, num_tel):
+        """Metodo que insere no XML as informacoes obrigatorias da pessoa que efetuara o pagamento"""
         
         self.validators.email(email)
         
-        self.monta_xml(self.xml_node, pagador=dict(nome=nome, email=email, telefones=dict(
+        self._monta_xml(self.xml_node, pagador=dict(nome=nome, email=email, telefones=dict(
                                                                                           telefone=dict(
                                                                                                         tipo=tipo_tel,
                                                                                                         numero=num_tel))))
@@ -70,8 +84,10 @@ class Akatus():
     
     @check_parameters
     def set_produto(self,codigo, descricao, quantidade, preco, peso, frete, desconto):
+        """Metodo que insere no XML as informacoes do produto comprado. A cada nova iteracao
+        deste metodo, um produto novo é adicionado ao XML"""
         
-        self.monta_xml(self.xml_node, unique=True, produtos=dict(produto=dict(codigo=codigo,
+        self._monta_xml(self.xml_node, unique=True, produtos=dict(produto=dict(codigo=codigo,
                                                                              descricao=descricao,
                                                                              quantidade=quantidade,
                                                                              preco=preco,
@@ -84,8 +100,9 @@ class Akatus():
     
     @check_parameters
     def set_transacao(self, desconto_total, peso_total, frete_total, moeda, referencia, meio_de_pagamento):
+        """Metodo que insere no XML as informacoes a respeito da transacao"""
         
-        self.monta_xml(self.xml_node, transacao=dict(desconto_total=desconto_total,
+        self._monta_xml(self.xml_node, transacao=dict(desconto_total=desconto_total,
                                                      peso_total=peso_total,
                                                      frete_total=frete_total,
                                                      moeda=moeda,
@@ -96,10 +113,14 @@ class Akatus():
     
     
     def _get_xml(self):
+        """Metodo interno que retorna o objeto etree em formato string"""
+        
         return etree.tostring(self.xml_node)
     
     
     def envia(self):
+        """Metodo que faz a validacao do XML usando um XML Schema e envia os dados para 
+        o sistema Akatus."""
         
         xmlbase = open("test/xmlschema.xsd","r")
         
@@ -127,6 +148,7 @@ class Akatus():
         return self
     
     def get_resposta(self):
+        """Metodo que retorna a resposta da API Akatus depois do envio dos dados."""
         
         resposta = etree.XML(self.retorno)
         
@@ -137,6 +159,8 @@ class Akatus():
     
     
 class RespostaAkatus:
+    """Classe que captura a resposta da API Akatus."""
+    
     def __init__(self):
         self.conteudo = ""
         
