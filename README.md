@@ -4,10 +4,15 @@ Módulo Akatus para integração com Python
 * Author: Alê Borba
 * Contributor: Igor Hercowitz
 
-Version: v0.0.6.1 Bugfix
+Version: v0.0.7
 
 ChangeLog:
 -----------
+
+0.0.7
+* Retira o arquivo de validação do Schema
+* Coloca a validação online, no gist oficial
+
 0.0.6.1 Bugfix
 * Corrige uma implementação na funçao monta_xml
 
