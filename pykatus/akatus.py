@@ -5,6 +5,7 @@ import pycurl
 
 from lxml import etree
 from validators import Validators, check_parameters
+from urllib2 import urlopen
 
 
 class Akatus():
@@ -101,7 +102,7 @@ class Akatus():
     
     def envia(self):
         
-        xmlbase = open("test/xmlschema.xsd","r")
+        xmlbase = urlopen("https://raw.github.com/Akatus/AkatusXMLSchema/master/cart.xsd")
         
         xmlparser   = etree.parse(xmlbase)
         xmlschema   = etree.XMLSchema(xmlparser)
